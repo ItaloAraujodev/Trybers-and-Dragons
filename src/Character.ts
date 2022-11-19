@@ -4,6 +4,7 @@ import Archetype, { Mage } from './Archetypes';
 import Energy from './Energy';
 import getRandomInt from './utils';
 
+const randola = getRandomInt(1, 10);
 export default class Character implements Fighter {
   private _race: Race;
   private _archetype: Archetype;
@@ -15,16 +16,16 @@ export default class Character implements Fighter {
   private _energy: Energy;
 
   constructor(name: string) {
-    this._dexterity = Math.floor(Math.random() * 10) + 1;
+    this._dexterity = randola;
     this._race = new Elf(name, this._dexterity);
     this._archetype = new Mage(name);
     this._maxLifePoints = this._race.maxLifePoints / 2;
     this._lifePoints = this._maxLifePoints;
-    this._strength = Math.floor(Math.random() * 10) + 1;
-    this._defense = Math.floor(Math.random() * 10) + 1;
+    this._strength = randola;
+    this._defense = randola;
     this._energy = { 
       type_: 'mana', 
-      amount: Math.floor(Math.random() * 10) + 1 };
+      amount: randola };
   }
 
   get race(): Race {
@@ -85,8 +86,7 @@ export default class Character implements Fighter {
   }
 
   levelUp(): void {
-    const randola = getRandomInt(1, 10);
-    this.energy.amount = 10;
+    this._energy.amount = 10;
     this._maxLifePoints += randola;
     this._strength += randola;
     this._dexterity += randola;
